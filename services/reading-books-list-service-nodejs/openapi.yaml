@@ -582,15 +582,6 @@ paths:
         - default:
             - "read:portfolioguidelines"
 components:
-  securitySchemes:
-    default:
-      type: oauth2
-      flows:
-        implicit:
-          authorizationUrl: "https://test.com"
-          scopes:
-            read:portfolioguidelines: ""
-            write:portfolioguidelines: ""
   schemas:
     Guideline:
       type: object
