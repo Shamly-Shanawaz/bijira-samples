@@ -1,214 +1,597 @@
-openapi: 3.0.1
-info:
-  title: Reading List API
-  description: This is a sample proxy that manages a list of reading items.
-  contact: {}
-  version: "1.0"
-servers:
-  - url: http://localhost:8080
-paths:
-  /books:
-    get:
-      tags:
-        - books
-      summary: List all the reading list books
-      responses:
-        "200":
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  books:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/models.Book'
-    post:
-      tags:
-        - books
-      summary: Add a new book to the reading list
-      requestBody:
-        description: New book details (without ID)
-        content:
-          application/json:
+ openapi: 3.0.4
+  info:
+    title: Portfolio.Guideline.Api
+    version: "1.0"
+  servers:
+    - url: /
+  paths:
+    /api/AccountGuideline/ID/{AccountId}:
+      get:
+        tags:
+          - AccountGuideline
+        parameters:
+          - name: AccountId
+            in: path
+            required: true
             schema:
-              $ref: '#/components/schemas/models.BookCreate'
-        required: true
-      responses:
-        "201":
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                allOf:
-                  - $ref: '#/components/schemas/models.Book'
-                  - type: object
-                    properties:
-                      note:
-                        type: string
-                        example: "Please note that changes are not persisted."
-        "400":
-          description: invalid book details
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/utils.ErrorResponse'
-        "409":
-          description: book already exists
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/utils.ErrorResponse'
-  /books/{id}:
-    get:
-      tags:
-        - books
-      summary: Get reading list book by id
-      parameters:
-        - name: id
-          in: path
-          description: Book ID
-          required: true
-          schema:
-            type: string
-      responses:
-        "200":
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/models.Book'
-        "404":
-          description: book not found
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/utils.ErrorResponse'
-    put:
-      tags:
-        - books
-      summary: Update a reading list book by id
-      parameters:
-        - name: id
-          in: path
-          description: Book ID
-          required: true
-          schema:
-            type: string
-      requestBody:
-        description: Updated book details (only status)
-        content:
-          application/json:
+              type: integer
+              format: int32
+        responses:
+          "200":
+            description: OK
+            content:
+              text/plain:
+                schema:
+                  type: array
+                  items:
+                    $ref: "#/components/schemas/Guideline"
+              application/json:
+                schema:
+                  type: array
+                  items:
+                    $ref: "#/components/schemas/Guideline"
+              text/json:
+                schema:
+                  type: array
+                  items:
+                    $ref: "#/components/schemas/Guideline"
+        security:
+          - default:
+              - "read:portfolioguidelines"
+    /api/AccountGuideline/{AccountNo}:
+      get:
+        tags:
+          - AccountGuideline
+        parameters:
+          - name: AccountNo
+            in: path
+            required: true
             schema:
-              $ref: '#/components/schemas/models.BookUpdate'
-        required: true
-      responses:
-        "200":
-          description: successful operation
+              type: string
+        responses:
+          "200":
+            description: OK
+            content:
+              text/plain:
+                schema:
+                  type: array
+                  items:
+                    $ref: "#/components/schemas/Guideline"
+              application/json:
+                schema:
+                  type: array
+                  items:
+                    $ref: "#/components/schemas/Guideline"
+              text/json:
+                schema:
+                  type: array
+                  items:
+                    $ref: "#/components/schemas/Guideline"
+        security:
+          - default:
+              - "read:portfolioguidelines"
+    /api/AccountGuideline/{AccountId}:
+      post:
+        tags:
+          - AccountGuideline
+        parameters:
+          - name: AccountId
+            in: path
+            required: true
+            schema:
+              type: integer
+              format: int32
+        requestBody:
           content:
             application/json:
               schema:
-                allOf:
-                  - $ref: '#/components/schemas/models.Book'
-                  - type: object
-                    properties:
-                      note:
-                        type: string
-                        example: "Please note that changes are not persisted."
-        "400":
-          description: invalid book details
+                $ref: "#/components/schemas/AccountGuideline"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/AccountGuideline"
+            application/*+json:
+              schema:
+                $ref: "#/components/schemas/AccountGuideline"
+        responses:
+          "200":
+            description: OK
+        security:
+          - default:
+              - "write:portfolioguidelines"
+    /api/AccountGuideline/{GuidelineValueId}:
+      put:
+        tags:
+          - AccountGuideline
+        parameters:
+          - name: GuidelineValueId
+            in: path
+            required: true
+            schema:
+              type: integer
+              format: int32
+        requestBody:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/utils.ErrorResponse'
-        "404":
-          description: book not found
+                $ref: "#/components/schemas/AccountGuideline"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/AccountGuideline"
+            application/*+json:
+              schema:
+                $ref: "#/components/schemas/AccountGuideline"
+        responses:
+          "200":
+            description: OK
+        security:
+          - default:
+              - "write:portfolioguidelines"
+    /api/AccountGuideline/upsert/{AccountId}:
+      post:
+        tags:
+          - AccountGuideline
+        parameters:
+          - name: AccountId
+            in: path
+            required: true
+            schema:
+              type: integer
+              format: int32
+        requestBody:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/utils.ErrorResponse'
-    delete:
-      tags:
-        - books
-      summary: Delete a reading list book by id
-      parameters:
-        - name: id
-          in: path
-          description: Book ID
-          required: true
-          schema:
-            type: string
-      responses:
-        "200":
-          description: successful operation
+                type: array
+                items:
+                  $ref: "#/components/schemas/AccountGuideline"
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/AccountGuideline"
+            application/*+json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/AccountGuideline"
+        responses:
+          "200":
+            description: OK
+        security:
+          - default:
+              - "write:portfolioguidelines"
+    /api/AccountGuideline/audit/{AccountNo}/{StartDate}/{EndDate}:
+      get:
+        tags:
+          - AccountGuideline
+        parameters:
+          - name: AccountNo
+            in: path
+            required: true
+            schema:
+              type: string
+          - name: StartDate
+            in: path
+            required: true
+            schema:
+              type: string
+              format: date
+          - name: EndDate
+            in: path
+            required: true
+            schema:
+              type: string
+              format: date
+        responses:
+          "200":
+            description: OK
+            content:
+              text/plain:
+                schema:
+                  type: array
+                  items:
+                    $ref: "#/components/schemas/AccountGuidelineAudit"
+              application/json:
+                schema:
+                  type: array
+                  items:
+                    $ref: "#/components/schemas/AccountGuidelineAudit"
+              text/json:
+                schema:
+                  type: array
+                  items:
+                    $ref: "#/components/schemas/AccountGuidelineAudit"
+        security:
+          - default:
+              - "read:portfolioguidelines"
+    /api/AccountGuideline/audit/{AccountNo}/{DaysToAudit}:
+      get:
+        tags:
+          - AccountGuideline
+        parameters:
+          - name: AccountNo
+            in: path
+            required: true
+            schema:
+              type: string
+          - name: DaysToAudit
+            in: path
+            required: true
+            schema:
+              type: integer
+              format: int32
+        responses:
+          "200":
+            description: OK
+            content:
+              text/plain:
+                schema:
+                  type: array
+                  items:
+                    $ref: "#/components/schemas/AccountGuidelineAudit"
+              application/json:
+                schema:
+                  type: array
+                  items:
+                    $ref: "#/components/schemas/AccountGuidelineAudit"
+              text/json:
+                schema:
+                  type: array
+                  items:
+                    $ref: "#/components/schemas/AccountGuidelineAudit"
+        security:
+          - default:
+              - "read:portfolioguidelines"
+    /api/AccountRestriction/ID/{AccountId}:
+      get:
+        tags:
+          - AccountRestriction
+        parameters:
+          - name: AccountId
+            in: path
+            required: true
+            schema:
+              type: integer
+              format: int32
+        responses:
+          "200":
+            description: OK
+            content:
+              text/plain:
+                schema:
+                  type: array
+                  items:
+                    $ref: "#/components/schemas/Restriction"
+              application/json:
+                schema:
+                  type: array
+                  items:
+                    $ref: "#/components/schemas/Restriction"
+              text/json:
+                schema:
+                  type: array
+                  items:
+                    $ref: "#/components/schemas/Restriction"
+        security:
+          - default:
+              - "read:portfolioguidelines"
+    /api/AccountRestriction/{AccountNo}:
+      get:
+        tags:
+          - AccountRestriction
+        parameters:
+          - name: AccountNo
+            in: path
+            required: true
+            schema:
+              type: string
+        responses:
+          "200":
+            description: OK
+            content:
+              text/plain:
+                schema:
+                  type: array
+                  items:
+                    $ref: "#/components/schemas/Restriction"
+              application/json:
+                schema:
+                  type: array
+                  items:
+                    $ref: "#/components/schemas/Restriction"
+              text/json:
+                schema:
+                  type: array
+                  items:
+                    $ref: "#/components/schemas/Restriction"
+        security:
+          - default:
+              - "read:portfolioguidelines"
+    /api/AccountRestriction/{AccountId}:
+      post:
+        tags:
+          - AccountRestriction
+        parameters:
+          - name: AccountId
+            in: path
+            required: true
+            schema:
+              type: integer
+              format: int32
+        requestBody:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  id:
-                    type: string
-                    example: fe2594d0-ccea-42a2-97ac-0487458b5642
-                  note:
-                    type: string
-                    example: "Please note that changes are not persisted."
-        "404":
-          description: book not found
+                $ref: "#/components/schemas/AccountRestriction"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/AccountRestriction"
+            application/*+json:
+              schema:
+                $ref: "#/components/schemas/AccountRestriction"
+        responses:
+          "200":
+            description: OK
+        security:
+          - default:
+              - "write:portfolioguidelines"
+    /api/AccountRestriction/{RestrictionValueId}:
+      put:
+        tags:
+          - AccountRestriction
+        parameters:
+          - name: RestrictionValueId
+            in: path
+            required: true
+            schema:
+              type: integer
+              format: int32
+        requestBody:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/utils.ErrorResponse'
-components:
-  schemas:
-    models.Book:
-      type: object
-      properties:
-        author:
-          type: string
-          example: J. R. R. Tolkien
-        id:
-          type: string
-          example: fe2594d0-ccea-42a2-97ac-0487458b5642
-        status:
-          type: string
-          enum:
-            - read
-            - to_read
-            - reading
-          example: to_read
-        title:
-          type: string
-          example: The Lord of the Rings
-    models.BookCreate:
-      type: object
-      properties:
-        author:
-          type: string
-          example: J. R. R. Tolkien
-        status:
-          type: string
-          enum:
-            - read
-            - to_read
-            - reading
-          example: to_read
-        title:
-          type: string
-          example: The Lord of the Rings
-    models.BookUpdate:
-      type: object
-      properties:
-        status:
-          type: string
-          enum:
-            - read
-            - to_read
-            - reading
-          example: reading
-    utils.ErrorResponse:
-      type: object
-      properties:
-        message:
-          type: string
-          example: error message
+                $ref: "#/components/schemas/AccountRestriction"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/AccountRestriction"
+            application/*+json:
+              schema:
+                $ref: "#/components/schemas/AccountRestriction"
+        responses:
+          "200":
+            description: OK
+        security:
+          - default:
+              - "write:portfolioguidelines"
+    /api/AccountRestriction/upsert/{AccountId}:
+      post:
+        tags:
+          - AccountRestriction
+        parameters:
+          - name: AccountId
+            in: path
+            required: true
+            schema:
+              type: integer
+              format: int32
+        requestBody:
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/AccountRestriction"
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/AccountRestriction"
+            application/*+json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/AccountRestriction"
+        responses:
+          "200":
+            description: OK
+        security:
+          - default:
+              - "write:portfolioguidelines"
+    /api/AccountRestriction/audit/{AccountNo}/{StartDate}/{EndDate}:
+      get:
+        tags:
+          - AccountRestriction
+        parameters:
+          - name: AccountNo
+            in: path
+            required: true
+            schema:
+              type: string
+          - name: StartDate
+            in: path
+            required: true
+            schema:
+              type: string
+              format: date
+          - name: EndDate
+            in: path
+            required: true
+            schema:
+              type: string
+              format: date
+        responses:
+          "200":
+            description: OK
+            content:
+              text/plain:
+                schema:
+                  type: array
+                  items:
+                    $ref: "#/components/schemas/AccountRestrictionAudit"
+              application/json:
+                schema:
+                  type: array
+                  items:
+                    $ref: "#/components/schemas/AccountRestrictionAudit"
+              text/json:
+                schema:
+                  type: array
+                  items:
+                    $ref: "#/components/schemas/AccountRestrictionAudit"
+        security:
+          - default:
+              - "read:portfolioguidelines"
+    /api/AccountRestriction/audit/{AccountNo}/{DaysToAudit}:
+      get:
+        tags:
+          - AccountRestriction
+        parameters:
+          - name: AccountNo
+            in: path
+            required: true
+            schema:
+              type: string
+          - name: DaysToAudit
+            in: path
+            required: true
+            schema:
+              type: integer
+              format: int32
+        responses:
+          "200":
+            description: OK
+            content:
+              text/plain:
+                schema:
+                  type: array
+                  items:
+                    $ref: "#/components/schemas/AccountRestrictionAudit"
+              application/json:
+                schema:
+                  type: array
+                  items:
+                    $ref: "#/components/schemas/AccountRestrictionAudit"
+              text/json:
+                schema:
+                  type: array
+                  items:
+                    $ref: "#/components/schemas/AccountRestrictionAudit"
+        security:
+          - default:
+              - "read:portfolioguidelines"
+    /api/Audit/{AccountNo}/{StartDate}/{EndDate}:
+      get:
+        tags:
+          - Audit
+        parameters:
+          - name: AccountNo
+            in: path
+            required: true
+            schema:
+              type: string
+          - name: StartDate
+            in: path
+            required: true
+            schema:
+              type: string
+              format: date
+          - name: EndDate
+            in: path
+            required: true
+            schema:
+              type: string
+              format: date
+        responses:
+          "200":
+            description: OK
+            content:
+              text/plain:
+                schema:
+                  type: array
+                  items: {}
+              application/json:
+                schema:
+                  type: array
+                  items: {}
+              text/json:
+                schema:
+                  type: array
+                  items: {}
+        security:
+          - default:
+              - "read:portfolioguidelines"
+    /api/Audit/{AccountNo}/{DaysToAudit}:
+      get:
+        tags:
+          - Audit
+        parameters:
+          - name: AccountNo
+            in: path
+            required: true
+            schema:
+              type: string
+          - name: DaysToAudit
+            in: path
+            required: true
+            schema:
+              type: integer
+              format: int32
+        responses:
+          "200":
+            description: OK
+            content:
+              text/plain:
+                schema:
+                  type: array
+                  items: {}
+              application/json:
+                schema:
+                  type: array
+                  items: {}
+              text/json:
+                schema:
+                  type: array
+                  items: {}
+        security:
+          - default:
+              - "read:portfolioguidelines"
+    /api/Guideline:
+      get:
+        tags:
+          - Guideline
+        responses:
+          "200":
+            description: OK
+            content:
+              text/plain:
+                schema:
+                  type: array
+                  items:
+                    $ref: "#/components/schemas/Guideline"
+              application/json:
+                schema:
+                  type: array
+                  items:
+                    $ref: "#/components/schemas/Guideline"
+              text/json:
+                schema:
+                  type: array
+                  items:
+                    $ref: "#/components/schemas/Guideline"
+        security:
+          - default:
+              - "read:portfolioguidelines"
+  components:
+    schemas:
+      Guideline:
+        type: object
+      AccountGuideline:
+        type: object
+      AccountGuidelineAudit:
+        type: object
+      Restriction:
+        type: object
+      AccountRestriction:
+        type: object
+      AccountRestrictionAudit:
+        type: object
