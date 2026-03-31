@@ -23,7 +23,7 @@ endpoints:
   # This name will be used when generating the managed API
   - name: books-rest-endpoint
     # +optional Display name for the endpoint.
-    displayName: Books REST Endpoint
+    displayName: Books REST Endpoint v2
     # +required Service section has the user service endpoint details
     service:
       # +optional Base path of the API that gets exposed via the endpoint.
