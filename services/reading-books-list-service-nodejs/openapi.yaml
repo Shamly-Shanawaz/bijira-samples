@@ -1,597 +1,597 @@
- openapi: 3.0.4
-  info:
-    title: Portfolio.Guideline.Api
-    version: "1.0"
-  servers:
-    - url: /
-  paths:
-    /api/AccountGuideline/ID/{AccountId}:
-      get:
-        tags:
-          - AccountGuideline
-        parameters:
-          - name: AccountId
-            in: path
-            required: true
-            schema:
-              type: integer
-              format: int32
-        responses:
-          "200":
-            description: OK
-            content:
-              text/plain:
-                schema:
-                  type: array
-                  items:
-                    $ref: "#/components/schemas/Guideline"
-              application/json:
-                schema:
-                  type: array
-                  items:
-                    $ref: "#/components/schemas/Guideline"
-              text/json:
-                schema:
-                  type: array
-                  items:
-                    $ref: "#/components/schemas/Guideline"
-        security:
-          - default:
-              - "read:portfolioguidelines"
-    /api/AccountGuideline/{AccountNo}:
-      get:
-        tags:
-          - AccountGuideline
-        parameters:
-          - name: AccountNo
-            in: path
-            required: true
-            schema:
-              type: string
-        responses:
-          "200":
-            description: OK
-            content:
-              text/plain:
-                schema:
-                  type: array
-                  items:
-                    $ref: "#/components/schemas/Guideline"
-              application/json:
-                schema:
-                  type: array
-                  items:
-                    $ref: "#/components/schemas/Guideline"
-              text/json:
-                schema:
-                  type: array
-                  items:
-                    $ref: "#/components/schemas/Guideline"
-        security:
-          - default:
-              - "read:portfolioguidelines"
-    /api/AccountGuideline/{AccountId}:
-      post:
-        tags:
-          - AccountGuideline
-        parameters:
-          - name: AccountId
-            in: path
-            required: true
-            schema:
-              type: integer
-              format: int32
-        requestBody:
+openapi: 3.0.4
+info:
+  title: Portfolio.Guideline.Api
+  version: "1.0"
+servers:
+  - url: /
+paths:
+  /api/AccountGuideline/ID/{AccountId}:
+    get:
+      tags:
+        - AccountGuideline
+      parameters:
+        - name: AccountId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        "200":
+          description: OK
           content:
-            application/json:
+            text/plain:
               schema:
-                $ref: "#/components/schemas/AccountGuideline"
-            text/json:
-              schema:
-                $ref: "#/components/schemas/AccountGuideline"
-            application/*+json:
-              schema:
-                $ref: "#/components/schemas/AccountGuideline"
-        responses:
-          "200":
-            description: OK
-        security:
-          - default:
-              - "write:portfolioguidelines"
-    /api/AccountGuideline/{GuidelineValueId}:
-      put:
-        tags:
-          - AccountGuideline
-        parameters:
-          - name: GuidelineValueId
-            in: path
-            required: true
-            schema:
-              type: integer
-              format: int32
-        requestBody:
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/AccountGuideline"
-            text/json:
-              schema:
-                $ref: "#/components/schemas/AccountGuideline"
-            application/*+json:
-              schema:
-                $ref: "#/components/schemas/AccountGuideline"
-        responses:
-          "200":
-            description: OK
-        security:
-          - default:
-              - "write:portfolioguidelines"
-    /api/AccountGuideline/upsert/{AccountId}:
-      post:
-        tags:
-          - AccountGuideline
-        parameters:
-          - name: AccountId
-            in: path
-            required: true
-            schema:
-              type: integer
-              format: int32
-        requestBody:
-          content:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Guideline"
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/AccountGuideline"
+                  $ref: "#/components/schemas/Guideline"
             text/json:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/AccountGuideline"
-            application/*+json:
+                  $ref: "#/components/schemas/Guideline"
+      security:
+        - default:
+            - "read:portfolioguidelines"
+  /api/AccountGuideline/{AccountNo}:
+    get:
+      tags:
+        - AccountGuideline
+      parameters:
+        - name: AccountNo
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            text/plain:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/AccountGuideline"
-        responses:
-          "200":
-            description: OK
-        security:
-          - default:
-              - "write:portfolioguidelines"
-    /api/AccountGuideline/audit/{AccountNo}/{StartDate}/{EndDate}:
-      get:
-        tags:
-          - AccountGuideline
-        parameters:
-          - name: AccountNo
-            in: path
-            required: true
-            schema:
-              type: string
-          - name: StartDate
-            in: path
-            required: true
-            schema:
-              type: string
-              format: date
-          - name: EndDate
-            in: path
-            required: true
-            schema:
-              type: string
-              format: date
-        responses:
-          "200":
-            description: OK
-            content:
-              text/plain:
-                schema:
-                  type: array
-                  items:
-                    $ref: "#/components/schemas/AccountGuidelineAudit"
-              application/json:
-                schema:
-                  type: array
-                  items:
-                    $ref: "#/components/schemas/AccountGuidelineAudit"
-              text/json:
-                schema:
-                  type: array
-                  items:
-                    $ref: "#/components/schemas/AccountGuidelineAudit"
-        security:
-          - default:
-              - "read:portfolioguidelines"
-    /api/AccountGuideline/audit/{AccountNo}/{DaysToAudit}:
-      get:
-        tags:
-          - AccountGuideline
-        parameters:
-          - name: AccountNo
-            in: path
-            required: true
-            schema:
-              type: string
-          - name: DaysToAudit
-            in: path
-            required: true
-            schema:
-              type: integer
-              format: int32
-        responses:
-          "200":
-            description: OK
-            content:
-              text/plain:
-                schema:
-                  type: array
-                  items:
-                    $ref: "#/components/schemas/AccountGuidelineAudit"
-              application/json:
-                schema:
-                  type: array
-                  items:
-                    $ref: "#/components/schemas/AccountGuidelineAudit"
-              text/json:
-                schema:
-                  type: array
-                  items:
-                    $ref: "#/components/schemas/AccountGuidelineAudit"
-        security:
-          - default:
-              - "read:portfolioguidelines"
-    /api/AccountRestriction/ID/{AccountId}:
-      get:
-        tags:
-          - AccountRestriction
-        parameters:
-          - name: AccountId
-            in: path
-            required: true
-            schema:
-              type: integer
-              format: int32
-        responses:
-          "200":
-            description: OK
-            content:
-              text/plain:
-                schema:
-                  type: array
-                  items:
-                    $ref: "#/components/schemas/Restriction"
-              application/json:
-                schema:
-                  type: array
-                  items:
-                    $ref: "#/components/schemas/Restriction"
-              text/json:
-                schema:
-                  type: array
-                  items:
-                    $ref: "#/components/schemas/Restriction"
-        security:
-          - default:
-              - "read:portfolioguidelines"
-    /api/AccountRestriction/{AccountNo}:
-      get:
-        tags:
-          - AccountRestriction
-        parameters:
-          - name: AccountNo
-            in: path
-            required: true
-            schema:
-              type: string
-        responses:
-          "200":
-            description: OK
-            content:
-              text/plain:
-                schema:
-                  type: array
-                  items:
-                    $ref: "#/components/schemas/Restriction"
-              application/json:
-                schema:
-                  type: array
-                  items:
-                    $ref: "#/components/schemas/Restriction"
-              text/json:
-                schema:
-                  type: array
-                  items:
-                    $ref: "#/components/schemas/Restriction"
-        security:
-          - default:
-              - "read:portfolioguidelines"
-    /api/AccountRestriction/{AccountId}:
-      post:
-        tags:
-          - AccountRestriction
-        parameters:
-          - name: AccountId
-            in: path
-            required: true
-            schema:
-              type: integer
-              format: int32
-        requestBody:
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/AccountRestriction"
-            text/json:
-              schema:
-                $ref: "#/components/schemas/AccountRestriction"
-            application/*+json:
-              schema:
-                $ref: "#/components/schemas/AccountRestriction"
-        responses:
-          "200":
-            description: OK
-        security:
-          - default:
-              - "write:portfolioguidelines"
-    /api/AccountRestriction/{RestrictionValueId}:
-      put:
-        tags:
-          - AccountRestriction
-        parameters:
-          - name: RestrictionValueId
-            in: path
-            required: true
-            schema:
-              type: integer
-              format: int32
-        requestBody:
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/AccountRestriction"
-            text/json:
-              schema:
-                $ref: "#/components/schemas/AccountRestriction"
-            application/*+json:
-              schema:
-                $ref: "#/components/schemas/AccountRestriction"
-        responses:
-          "200":
-            description: OK
-        security:
-          - default:
-              - "write:portfolioguidelines"
-    /api/AccountRestriction/upsert/{AccountId}:
-      post:
-        tags:
-          - AccountRestriction
-        parameters:
-          - name: AccountId
-            in: path
-            required: true
-            schema:
-              type: integer
-              format: int32
-        requestBody:
-          content:
+                  $ref: "#/components/schemas/Guideline"
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/AccountRestriction"
+                  $ref: "#/components/schemas/Guideline"
             text/json:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/AccountRestriction"
-            application/*+json:
+                  $ref: "#/components/schemas/Guideline"
+      security:
+        - default:
+            - "read:portfolioguidelines"
+  /api/AccountGuideline/{AccountId}:
+    post:
+      tags:
+        - AccountGuideline
+      parameters:
+        - name: AccountId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AccountGuideline"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/AccountGuideline"
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/AccountGuideline"
+      responses:
+        "200":
+          description: OK
+      security:
+        - default:
+            - "write:portfolioguidelines"
+  /api/AccountGuideline/{GuidelineValueId}:
+    put:
+      tags:
+        - AccountGuideline
+      parameters:
+        - name: GuidelineValueId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AccountGuideline"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/AccountGuideline"
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/AccountGuideline"
+      responses:
+        "200":
+          description: OK
+      security:
+        - default:
+            - "write:portfolioguidelines"
+  /api/AccountGuideline/upsert/{AccountId}:
+    post:
+      tags:
+        - AccountGuideline
+      parameters:
+        - name: AccountId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: "#/components/schemas/AccountGuideline"
+          text/json:
+            schema:
+              type: array
+              items:
+                $ref: "#/components/schemas/AccountGuideline"
+          application/*+json:
+            schema:
+              type: array
+              items:
+                $ref: "#/components/schemas/AccountGuideline"
+      responses:
+        "200":
+          description: OK
+      security:
+        - default:
+            - "write:portfolioguidelines"
+  /api/AccountGuideline/audit/{AccountNo}/{StartDate}/{EndDate}:
+    get:
+      tags:
+        - AccountGuideline
+      parameters:
+        - name: AccountNo
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: StartDate
+          in: path
+          required: true
+          schema:
+            type: string
+            format: date
+        - name: EndDate
+          in: path
+          required: true
+          schema:
+            type: string
+            format: date
+      responses:
+        "200":
+          description: OK
+          content:
+            text/plain:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/AccountRestriction"
-        responses:
-          "200":
-            description: OK
-        security:
-          - default:
-              - "write:portfolioguidelines"
-    /api/AccountRestriction/audit/{AccountNo}/{StartDate}/{EndDate}:
-      get:
-        tags:
-          - AccountRestriction
-        parameters:
-          - name: AccountNo
-            in: path
-            required: true
+                  $ref: "#/components/schemas/AccountGuidelineAudit"
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/AccountGuidelineAudit"
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/AccountGuidelineAudit"
+      security:
+        - default:
+            - "read:portfolioguidelines"
+  /api/AccountGuideline/audit/{AccountNo}/{DaysToAudit}:
+    get:
+      tags:
+        - AccountGuideline
+      parameters:
+        - name: AccountNo
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: DaysToAudit
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        "200":
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/AccountGuidelineAudit"
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/AccountGuidelineAudit"
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/AccountGuidelineAudit"
+      security:
+        - default:
+            - "read:portfolioguidelines"
+  /api/AccountRestriction/ID/{AccountId}:
+    get:
+      tags:
+        - AccountRestriction
+      parameters:
+        - name: AccountId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        "200":
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Restriction"
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Restriction"
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Restriction"
+      security:
+        - default:
+            - "read:portfolioguidelines"
+  /api/AccountRestriction/{AccountNo}:
+    get:
+      tags:
+        - AccountRestriction
+      parameters:
+        - name: AccountNo
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Restriction"
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Restriction"
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Restriction"
+      security:
+        - default:
+            - "read:portfolioguidelines"
+  /api/AccountRestriction/{AccountId}:
+    post:
+      tags:
+        - AccountRestriction
+      parameters:
+        - name: AccountId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+      requestBody:
+        content:
+          application/json:
             schema:
-              type: string
-          - name: StartDate
-            in: path
-            required: true
+              $ref: "#/components/schemas/AccountRestriction"
+          text/json:
             schema:
-              type: string
-              format: date
-          - name: EndDate
-            in: path
-            required: true
+              $ref: "#/components/schemas/AccountRestriction"
+          application/*+json:
             schema:
-              type: string
-              format: date
-        responses:
-          "200":
-            description: OK
-            content:
-              text/plain:
-                schema:
-                  type: array
-                  items:
-                    $ref: "#/components/schemas/AccountRestrictionAudit"
-              application/json:
-                schema:
-                  type: array
-                  items:
-                    $ref: "#/components/schemas/AccountRestrictionAudit"
-              text/json:
-                schema:
-                  type: array
-                  items:
-                    $ref: "#/components/schemas/AccountRestrictionAudit"
-        security:
-          - default:
-              - "read:portfolioguidelines"
-    /api/AccountRestriction/audit/{AccountNo}/{DaysToAudit}:
-      get:
-        tags:
-          - AccountRestriction
-        parameters:
-          - name: AccountNo
-            in: path
-            required: true
+              $ref: "#/components/schemas/AccountRestriction"
+      responses:
+        "200":
+          description: OK
+      security:
+        - default:
+            - "write:portfolioguidelines"
+  /api/AccountRestriction/{RestrictionValueId}:
+    put:
+      tags:
+        - AccountRestriction
+      parameters:
+        - name: RestrictionValueId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+      requestBody:
+        content:
+          application/json:
             schema:
-              type: string
-          - name: DaysToAudit
-            in: path
-            required: true
+              $ref: "#/components/schemas/AccountRestriction"
+          text/json:
             schema:
-              type: integer
-              format: int32
-        responses:
-          "200":
-            description: OK
-            content:
-              text/plain:
-                schema:
-                  type: array
-                  items:
-                    $ref: "#/components/schemas/AccountRestrictionAudit"
-              application/json:
-                schema:
-                  type: array
-                  items:
-                    $ref: "#/components/schemas/AccountRestrictionAudit"
-              text/json:
-                schema:
-                  type: array
-                  items:
-                    $ref: "#/components/schemas/AccountRestrictionAudit"
-        security:
-          - default:
-              - "read:portfolioguidelines"
-    /api/Audit/{AccountNo}/{StartDate}/{EndDate}:
-      get:
-        tags:
-          - Audit
-        parameters:
-          - name: AccountNo
-            in: path
-            required: true
+              $ref: "#/components/schemas/AccountRestriction"
+          application/*+json:
             schema:
-              type: string
-          - name: StartDate
-            in: path
-            required: true
+              $ref: "#/components/schemas/AccountRestriction"
+      responses:
+        "200":
+          description: OK
+      security:
+        - default:
+            - "write:portfolioguidelines"
+  /api/AccountRestriction/upsert/{AccountId}:
+    post:
+      tags:
+        - AccountRestriction
+      parameters:
+        - name: AccountId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+      requestBody:
+        content:
+          application/json:
             schema:
-              type: string
-              format: date
-          - name: EndDate
-            in: path
-            required: true
+              type: array
+              items:
+                $ref: "#/components/schemas/AccountRestriction"
+          text/json:
             schema:
-              type: string
-              format: date
-        responses:
-          "200":
-            description: OK
-            content:
-              text/plain:
-                schema:
-                  type: array
-                  items: {}
-              application/json:
-                schema:
-                  type: array
-                  items: {}
-              text/json:
-                schema:
-                  type: array
-                  items: {}
-        security:
-          - default:
-              - "read:portfolioguidelines"
-    /api/Audit/{AccountNo}/{DaysToAudit}:
-      get:
-        tags:
-          - Audit
-        parameters:
-          - name: AccountNo
-            in: path
-            required: true
+              type: array
+              items:
+                $ref: "#/components/schemas/AccountRestriction"
+          application/*+json:
             schema:
-              type: string
-          - name: DaysToAudit
-            in: path
-            required: true
-            schema:
-              type: integer
-              format: int32
-        responses:
-          "200":
-            description: OK
-            content:
-              text/plain:
-                schema:
-                  type: array
-                  items: {}
-              application/json:
-                schema:
-                  type: array
-                  items: {}
-              text/json:
-                schema:
-                  type: array
-                  items: {}
-        security:
-          - default:
-              - "read:portfolioguidelines"
-    /api/Guideline:
-      get:
-        tags:
-          - Guideline
-        responses:
-          "200":
-            description: OK
-            content:
-              text/plain:
-                schema:
-                  type: array
-                  items:
-                    $ref: "#/components/schemas/Guideline"
-              application/json:
-                schema:
-                  type: array
-                  items:
-                    $ref: "#/components/schemas/Guideline"
-              text/json:
-                schema:
-                  type: array
-                  items:
-                    $ref: "#/components/schemas/Guideline"
-        security:
-          - default:
-              - "read:portfolioguidelines"
-  components:
-    schemas:
-      Guideline:
-        type: object
-      AccountGuideline:
-        type: object
-      AccountGuidelineAudit:
-        type: object
-      Restriction:
-        type: object
-      AccountRestriction:
-        type: object
-      AccountRestrictionAudit:
-        type: object
+              type: array
+              items:
+                $ref: "#/components/schemas/AccountRestriction"
+      responses:
+        "200":
+          description: OK
+      security:
+        - default:
+            - "write:portfolioguidelines"
+  /api/AccountRestriction/audit/{AccountNo}/{StartDate}/{EndDate}:
+    get:
+      tags:
+        - AccountRestriction
+      parameters:
+        - name: AccountNo
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: StartDate
+          in: path
+          required: true
+          schema:
+            type: string
+            format: date
+        - name: EndDate
+          in: path
+          required: true
+          schema:
+            type: string
+            format: date
+      responses:
+        "200":
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/AccountRestrictionAudit"
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/AccountRestrictionAudit"
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/AccountRestrictionAudit"
+      security:
+        - default:
+            - "read:portfolioguidelines"
+  /api/AccountRestriction/audit/{AccountNo}/{DaysToAudit}:
+    get:
+      tags:
+        - AccountRestriction
+      parameters:
+        - name: AccountNo
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: DaysToAudit
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        "200":
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/AccountRestrictionAudit"
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/AccountRestrictionAudit"
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/AccountRestrictionAudit"
+      security:
+        - default:
+            - "read:portfolioguidelines"
+  /api/Audit/{AccountNo}/{StartDate}/{EndDate}:
+    get:
+      tags:
+        - Audit
+      parameters:
+        - name: AccountNo
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: StartDate
+          in: path
+          required: true
+          schema:
+            type: string
+            format: date
+        - name: EndDate
+          in: path
+          required: true
+          schema:
+            type: string
+            format: date
+      responses:
+        "200":
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: array
+                items: {}
+            application/json:
+              schema:
+                type: array
+                items: {}
+            text/json:
+              schema:
+                type: array
+                items: {}
+      security:
+        - default:
+            - "read:portfolioguidelines"
+  /api/Audit/{AccountNo}/{DaysToAudit}:
+    get:
+      tags:
+        - Audit
+      parameters:
+        - name: AccountNo
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: DaysToAudit
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        "200":
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: array
+                items: {}
+            application/json:
+              schema:
+                type: array
+                items: {}
+            text/json:
+              schema:
+                type: array
+                items: {}
+      security:
+        - default:
+            - "read:portfolioguidelines"
+  /api/Guideline:
+    get:
+      tags:
+        - Guideline
+      responses:
+        "200":
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Guideline"
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Guideline"
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Guideline"
+      security:
+        - default:
+            - "read:portfolioguidelines"
+components:
+  schemas:
+    Guideline:
+      type: object
+    AccountGuideline:
+      type: object
+    AccountGuidelineAudit:
+      type: object
+    Restriction:
+      type: object
+    AccountRestriction:
+      type: object
+    AccountRestrictionAudit:
+      type: object
